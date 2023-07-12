@@ -21,12 +21,12 @@ public class ExampleController {
 	@GetMapping("/webclient")
 	public Mono<Void> getWebclient() {
 		return Mono.just(1)
-				.doOnSuccess(a -> WebClient.create().get()
-						.uri("https://httpbin.org/get")
+				.doOnSuccess(a -> webClient.get()
+						.uri("http://www.google.pl/")
 						.retrieve()
 						.bodyToMono(String.class)
 						.doOnNext(next -> {
-							System.out.println(context.context());
+/*context is null here ->*/ System.out.println(context.context());
 						})
 						.subscribe())
 				.then();
